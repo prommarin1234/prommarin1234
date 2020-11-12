@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <title>webSql</title>
+</head>
+
+<body>
+    <h2>Guest Book Bt Moto-God</h2>
+    <fieldset>
+        <legend>ลงบันทึกสมุดเยี่ยม</legend>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
+        ชื่อ : <input type="text" name="full_Name" id="full_Name"><br>
+        <button id="submit">Save</button><button id="drop">DROP</button>
+    </fieldset>
+    <div id="show">
+
+    </div>
+</body>
+
+</html>
+<script>
+    $(function () {
+        var db = openDatabase('gustbook.db', '1.0', 'test database', 2 * 1024 * 1024)
+
+
+        db.transaction(function (transaction) {
+            var sql = "CREATE TABLE gustbook " +
+                "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "comment VARCHAR(100) NOT NULL," +
+                "full_Name VARCHAR(20) NOT NULL," +
+                "date VARCHAR(50) NOT NULL)";
+           // $("#show").html(sql)
+            transaction.executeSql(sql)
+        })
+
+        $("#submit").click(function () {
+            db.transaction(function (tx) {
+                let [month, date, year]    = ( new Date() ).toLocaleDateString().split("/")
+                let full_date = date+"/"+month+"/"+year
+                console.log(full_date)
+                var comment = $("#comment").val();
+                var full_Name = $("#full_Name").val();
+                var sql = `INSERT INTO gustbook (comment,full_Name,date) VALUES ("${comment}","${full_Name}","${full_date}")`
+                console.log(sql)
+                tx.executeSql(sql,undefined,function(){
+                    window.alert("Success!!!!")
+                })
+            })
+        })
+    })
+</script>

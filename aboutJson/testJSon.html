@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="../js/jquery3_5_1.js"></script>
+</head>
+
+<script>
+  $(function(){  
+   
+   
+
+var myobj=[{
+
+        "name":"Mr x",
+        "age":20,
+        "email":"Mr x@gmail.com"
+    },
+        {
+
+        "name":"Mr y",
+        "age":20,
+        "email":"Mr y@gmail.com"
+        },
+    {
+        "name":"Mr z",
+        "age":20,
+        "email":"Mr z@gmail.com"
+        },            
+]
+
+var x="";
+for(i in myobj){
+x+="<br><br> ชื่อคือ "+myobj[i].name;
+x+="<br><br> อายุคือ "+myobj[i].age;
+x+="<br><br> email คือ "+myobj[i].email;
+
+        }
+
+            $("#myMessage").html(x);
+});
+
+</script>
+
+<body>
+<h1>หัวข้อเรื่อง การดึงข้อมูง Json</h1><div id="myMessage"></div>
+<div id="myMessage"></div>
+</body>
+</html>
